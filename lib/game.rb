@@ -6,16 +6,16 @@ class Game
   def initialize
     puts "What's the name of the first player?"
     print "> "
-    name_player_1 = gets.chomp
+    name_player_1 = gets.chomp.capitalize!
     puts "#{name_player_1} you got the X's."
-    player_color_1 = "X"
-    @player_1 = Player.new(name_player_1, player_color_1)
+    player_mark_1 = "X"
+    @player_1 = Player.new(name_player_1, player_mark_1)
     puts "What's the name of the second player?"
     print "> "
-    name_player_2 = gets.chomp
+    name_player_2 = gets.chomp.capitalize!
     puts "#{name_player_2} you got the O's."
-    player_color_2 = "O"
-    @player_2 = Player.new(name_player_2, player_color_2)
+    player_mark_2 = "O"
+    @player_2 = Player.new(name_player_2, player_mark_2)
     @players = [@player_1, @player_2]
     @object_board = Board.new
   end
@@ -37,25 +37,23 @@ class Game
 
   def turn
       turns = 0
-    while @object_board.victory? == false do #Tant que les conditions de la victoire ne sont pas atteintes
-      @players.each{ |player| #On itère sur chaque joueur placé dans l'array @players
-        @object_board.display_board #On affiche le tableau
-        #p turns
-        puts "================= TURN #{turns + 1} =================" #On affiche le tour
-        puts "#{player.name}! Where do you wanna put your mark?"   #On demande une case à l'utilisateur
+    while @object_board.victory? == false do # Tant que les conditions de la victoire ne sont pas atteintes
+      @players.each{ |player| # On itère sur chaque joueur placé dans l'array @players
+        @object_board.display_board # On affiche le tableau
+        puts "================= TURN #{turns + 1} =================" # On affiche le tour en question
+        puts "#{player.name}! Where do you wanna put your mark?"   # On demande une case à l'utilisateur
         puts "Give a value between 1 & 9 :"
         print "> "
-        n = gets.chomp.to_i   #On enregistre la case dans la variable n
+        n = gets.chomp.to_i   # On enregistre la case dans la variable n
          # On lui retire 1 pour qu'elle correspondent à un index
-          until n > 0 && n < 10
+          until n > 0 && n < 10 # On accepte que de 1 à 9
             puts "Wrong number given, try again:"
             print '> '
             n = gets.chomp.to_i
           end
-          n = n - 1
-        @info_player = [player.name, player.player_color, n]
+          n = n - 1 # On retire 1 pour que ça corresponde à l'index (sans ça on commence à 0 et pas à 1)
+        @info_player = [player.name, player.player_mark, n]
         @object_board.play(@info_player)
-        #puts @object_board.victory?
 
         if @object_board.victory?
           @object_board.display_board
@@ -91,7 +89,7 @@ class Game
         break
       end
       }
-    end #Fin de While loop
+    end #Fin de la boucle while
   end
 end
 
