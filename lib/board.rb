@@ -11,15 +11,15 @@ class Board
     puts "-----------"
     puts " #{@board[3]} | #{@board[4]} | #{@board[5]}"
     puts "-----------"
-    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} \n\n"
+    puts " #{@board[6]} | #{@board[7]} | #{@board[8]}\n\n"
   end
 
   def play(array)
-    if @board[array[2]] == 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9
+    if @board[array[2]] == 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 # Va checker si la case du plateau est libre
       if array[1] == "X"
         @board[array[2]] = "X".yellow
       else
-        @board[array[2]] = "O".yellow
+        @board[array[2]] = "O".red
       end
     else
       puts "Too bad! You just missed your turn!"
